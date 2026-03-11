@@ -1,0 +1,217 @@
+const section = document.getElementById("accordionSection")
+
+const stayBtn = document.getElementById("stayBtn")
+const hotelBtn = document.getElementById("hotelBtn")
+
+/* RESET BUTTON STATE */
+
+function resetButtons(){
+
+stayBtn.classList.remove("active")
+hotelBtn.classList.remove("active")
+
+}
+
+/* ========================= */
+/* STAYCLUB SECTION */
+/* ========================= */
+
+function openStayClub(selectedProperty=null){
+
+resetButtons()
+
+stayBtn.classList.add("active")
+
+const kochiProps = ["river","luna","tranquil"]
+const ootyProps = ["woody","container","yrt","hillheaven","littlehome"]
+const munnarProps = ["mist"]
+
+const cityOpen = kochiProps.includes(selectedProperty)
+const hillOpen = ootyProps.includes(selectedProperty) || munnarProps.includes(selectedProperty)
+
+const ootyOpen = ootyProps.includes(selectedProperty)
+const munnarOpen = munnarProps.includes(selectedProperty)
+
+section.innerHTML = `
+
+<details ${cityOpen ? "open":""}>
+<summary>City</summary>
+
+<details class="nested" ${cityOpen ? "open":""}>
+<summary>Properties in Kochi</summary>
+
+<button class="hotel-btn ${selectedProperty==='river'?'active':''}" onclick="openPropertyPage('river')">
+River Vill'e (Edappally)
+</button>
+
+<button class="hotel-btn ${selectedProperty==='luna'?'active':''}" onclick="openPropertyPage('luna')">
+Luna Nest (Edappally)
+</button>
+
+<button class="hotel-btn ${selectedProperty==='tranquil'?'active':''}" onclick="openPropertyPage('tranquil')">
+Tranquil (Edakochi)
+</button>
+
+</details>
+</details>
+
+
+<details ${hillOpen ? "open":""}>
+<summary>Hill Stations</summary>
+
+<details class="nested" ${ootyOpen ? "open":""}>
+<summary>Properties in Ooty</summary>
+
+<button class="hotel-btn ${selectedProperty==='woody'?'active':''}" onclick="openPropertyPage('woody')">
+Woody & Co (Coonoor)
+</button>
+
+<button class="hotel-btn ${selectedProperty==='container'?'active':''}" onclick="openPropertyPage('container')">
+Container Home (Coonoor)
+</button>
+
+<button class="hotel-btn ${selectedProperty==='yrt'?'active':''}" onclick="openPropertyPage('yrt')">
+YRT Paradise (Coonoor)
+</button>
+
+<button class="hotel-btn ${selectedProperty==='hillheaven'?'active':''}" onclick="openPropertyPage('hillheaven')">
+Hill Heaven (Kothagiri)
+</button>
+
+<button class="hotel-btn ${selectedProperty==='littlehome'?'active':''}" onclick="openPropertyPage('littlehome')">
+Little Home (Ooty)
+</button>
+
+</details>
+
+<details class="nested" ${munnarOpen ? "open":""}>
+<summary>Properties in Munnar</summary>
+
+<button class="hotel-btn ${selectedProperty==='mist'?'active':''}" onclick="openPropertyPage('mist')">
+Mist'e Munnar
+</button>
+
+</details>
+
+</details>
+
+`
+
+section.scrollIntoView({behavior:"smooth"})
+
+}
+
+/* ========================= */
+/* HOTEL SECTION */
+/* ========================= */
+
+function openHotels(selectedHotel=null){
+
+resetButtons()
+
+hotelBtn.classList.add("active")
+
+const thrissurHotels = ["central","amaravati"]
+const kochiHotels = ["dana","palm","zoot","saaaj"]
+
+const thrissurOpen = thrissurHotels.includes(selectedHotel)
+const kochiOpen = kochiHotels.includes(selectedHotel)
+
+section.innerHTML = `
+
+<details ${thrissurOpen ? "open":""}>
+<summary>Hotels in Thrissur</summary>
+
+<button class="hotel-btn ${selectedHotel==='central'?'active':''}" onclick="openHotelPage('central')">
+Central Hotel by D2V
+</button>
+
+<button class="hotel-btn ${selectedHotel==='amaravati'?'active':''}" onclick="openHotelPage('amaravati')">
+Hotel Amaravati by D2V
+</button>
+
+</details>
+
+<details ${kochiOpen ? "open":""}>
+<summary>Hotels in Kochi</summary>
+
+<button class="hotel-btn ${selectedHotel==='dana'?'active':''}" onclick="openHotelPage('dana')">
+Dana Residency (Thammanam)
+</button>
+
+<button class="hotel-btn ${selectedHotel==='palm'?'active':''}" onclick="openHotelPage('palm')">
+Palm Grove by D2V (Edappally)
+</button>
+
+<button class="hotel-btn ${selectedHotel==='zoot'?'active':''}" onclick="openHotelPage('zoot')">
+Zoot by D2V (Kakkanad)
+</button>
+
+<button class="hotel-btn ${selectedHotel==='saaaj'?'active':''}" onclick="openHotelPage('saaaj')">
+Hotel Saaaj (Kalamassery)
+</button>
+
+</details>
+
+`
+
+section.scrollIntoView({behavior:"smooth"})
+
+}
+
+/* ========================= */
+/* OPEN HOTEL PAGE */
+/* ========================= */
+
+function openHotelPage(hotel){
+
+window.location.href = "hotel.html?name=" + hotel + "&from=hotel"
+
+}
+
+/* ========================= */
+/* OPEN STAYCLUB PROPERTY */
+/* ========================= */
+
+function openPropertyPage(property){
+
+window.location.href = "stayclub.html?name=" + property + "&from=stayclub"
+
+}
+
+/* ========================= */
+/* AUTO OPEN AFTER BACK */
+/* ========================= */
+
+const params = new URLSearchParams(window.location.search)
+
+const open = params.get("open")
+const property = params.get("property")
+const hotel = params.get("hotel")
+
+if(open === "stayclub"){
+openStayClub(property)
+}
+
+if(open === "hotel"){
+openHotels(hotel)
+}
+
+/* ========================= */
+/* CLICK OUTSIDE RESET */
+/* ========================= */
+
+document.addEventListener("click", function(e){
+
+if(
+!stayBtn.contains(e.target) &&
+!hotelBtn.contains(e.target) &&
+!section.contains(e.target)
+){
+
+resetButtons()
+section.innerHTML=""
+
+}
+
+})

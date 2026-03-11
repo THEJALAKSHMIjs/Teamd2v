@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Hotel</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.property-container{
+max-width:1100px;
+margin:auto;
+padding:40px;
+text-align:center;
+}
+
+.category-title{
+margin-top:40px;
+font-size:26px;
+}
+
+.property-images img{
+width:300px;
+height:220px;
+object-fit:cover;
+margin:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+.back-btn{
+margin-top:40px;
+padding:15px 40px;
+font-size:18px;
+background:#e4be25;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="property-container">
+
+<h1 id="hotelTitle"></h1>
+
+<div id="images"></div>
+
+<button class="back-btn" onclick="goBack()">Back</button>
+
+</div>
+
+
+<script>
+
+const params = new URLSearchParams(window.location.search)
+
+const hotel = params.get("name")
+
+const title = document.getElementById("hotelTitle")
+
+const images = document.getElementById("images")
+
+
+const hotelData = {
+
+central:{
+title:"Central Hotel by D2V",
+images: Array.from({length:57}, (_,i) => `images/cen/c${i+1}.jpeg`)
+},
+
+amaravati:{
+title:"Hotel Amaravati by D2V",
+images: Array.from({length:48}, (_,i) => `images/am/am${i+1}.jpeg`)
+},
+
+dana:{
+title:"Dana Residency (Thammanam)",
+categories:{
+
+deluxe: Array.from({length:6}, (_,i) => `images/dana/deluxe/d${i+1}.jpeg`),
+
+executive: Array.from({length:15}, (_,i) => `images/dana/executive/e${i+1}.jpeg`),
+
+suite: Array.from({length:15}, (_,i) => `images/dana/suite/s${i+1}.jpeg`)
+
+}
+},
+
+palm:{
+title:"Palm Grove by D2V (Edappally)",
+images: Array.from({length:18}, (_,i)=> `images/palm/p${i+1}.jpeg`)
+},
+
+zoot:{
+title:"Zoot by D2V (Kakkanad)",
+images:["images/zoot1.jpg","images/zoot2.jpg"]
+},
+
+/* NEW HOTEL */
+
+saaaj:{
+title:"Hotel Saaaj (Kalamassery)",
+categories:{
+
+standard: Array.from({length:5}, (_,i)=> `images/saaaj/standard/s${i+1}.jpeg`),
+
+family: Array.from({length:7}, (_,i)=> `images/saaaj/family/f${i+1}.jpeg`),
+
+deluxe: Array.from({length:10}, (_,i)=> `images/saaaj/deluxe/d${i+1}.jpeg`),
+
+bhk2: Array.from({length:10}, (_,i)=> `images/saaaj/2bhk/b${i+1}.jpeg`)
+
+}
+}
+
+}
+
+
+const selectedHotel = hotelData[hotel]
+
+title.innerText = selectedHotel.title
+
+
+/* NORMAL HOTELS */
+
+if(selectedHotel.images){
+
+const gallery = document.createElement("div")
+gallery.className="property-images"
+
+selectedHotel.images.forEach(img=>{
+gallery.innerHTML += `<img src="${img}">`
+})
+
+images.appendChild(gallery)
+
+}
+
+
+/* CATEGORY HOTELS */
+
+if(selectedHotel.categories){
+
+Object.entries(selectedHotel.categories).forEach(([category, imgs])=>{
+
+const categoryTitle=document.createElement("h2")
+categoryTitle.className="category-title"
+categoryTitle.innerText=category.toUpperCase()
+
+images.appendChild(categoryTitle)
+
+const gallery=document.createElement("div")
+gallery.className="property-images"
+
+imgs.forEach(img=>{
+gallery.innerHTML+=`<img src="${img}">`
+})
+
+images.appendChild(gallery)
+
+})
+
+}
+
+
+function goBack(){
+
+const params = new URLSearchParams(window.location.search)
+
+const hotel = params.get("name")
+
+window.location.href = "index.html?open=hotel&hotel=" + hotel
+
+}
+
+</script>
+
+
+</body>
+</html>

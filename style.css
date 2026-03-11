@@ -1,0 +1,335 @@
+body{
+margin:0;
+font-family: "Kelly Slab", sans-serif;
+background:#fffaf0;
+}
+
+
+/* HERO SECTION */
+
+.hero{
+
+min-height:100vh;
+
+background-image:linear-gradient(rgba(248, 220, 165, 0.8), rgba(232, 218, 188, 0.8)),
+url("images/d2vicon.PNG");
+
+background-position:center;
+background-repeat:no-repeat;
+background-size:60%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+padding:40px 20px;
+
+}
+
+
+/* CONTENT */
+
+.content{
+position:relative;
+text-align:center;
+max-width:900px;
+}
+
+
+/* HEADING */
+
+h1{
+
+font-size:clamp(38px,6vw,65px);
+
+margin-bottom:45px;
+
+background:linear-gradient(90deg,#e4be25,#a8976a);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+font-weight:700;
+
+letter-spacing:1px;
+
+}
+
+
+/* BUTTONS CONTAINER */
+
+.buttons{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+}
+
+
+/* BUTTON STYLE */
+
+.buttons button{
+
+background:linear-gradient(135deg, rgba(255,140,0,0.85), rgba(255,183,3,0.85));
+
+color:black;
+
+border:none;
+
+padding:20px 65px;
+
+font-size:24px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+
+/* THICK SHADOW */
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.35),
+0 5px 10px rgba(0,0,0,0.25);
+
+transition:all 0.35s ease;
+
+backdrop-filter:blur(4px);
+
+}
+
+
+/* BUTTON HOVER */
+
+.buttons button:hover{
+
+transform:translateY(-7px) scale(1.04);
+
+box-shadow:
+0 20px 45px rgba(0,0,0,0.4),
+0 8px 18px rgba(0,0,0,0.3);
+
+}
+
+
+/* ACTIVE BUTTON */
+
+.active{
+
+background:linear-gradient(135deg, rgba(240,239,237), rgba(237,142,17)) !important;
+
+box-shadow:
+0 0 20px rgba(255,165,0,0.8),
+0 10px 30px rgba(0,0,0,0.3);
+
+transform:scale(1.06);
+
+}
+
+
+/* ACCORDION SECTION */
+
+.accordion-section{
+
+margin-top:50px;
+
+width:800px;
+
+max-width:90%;
+
+margin-left:auto;
+margin-right:auto;
+
+}
+
+
+/* MAIN ACCORDION */
+
+details{
+
+background:linear-gradient(135deg,#fff2cc,#fff9e6);
+
+padding:22px;
+
+margin-bottom:20px;
+
+border-radius:10px;
+
+box-shadow:0 10px 22px rgba(0,0,0,0.15);
+
+transition:0.3s;
+
+}
+
+
+/* ACCORDION TITLE */
+
+summary{
+
+font-size:22px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+
+/* NESTED ACCORDION */
+
+.nested{
+
+margin-left:30px;
+
+margin-top:15px;
+
+background:linear-gradient(135deg,#fff7e0,#ffffff);
+
+border-radius:8px;
+
+}
+
+
+/* HOTEL BUTTON */
+
+.hotel-btn{
+
+display:block;
+
+width:100%;
+
+margin-top:12px;
+
+padding:15px;
+
+background:linear-gradient(135deg,#ffe082,#ffb74d);
+
+border:none;
+
+cursor:pointer;
+
+font-size:17px;
+
+font-weight:600;
+
+/* THICK SHADOW */
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.3),
+0 4px 10px rgba(0,0,0,0.2);
+
+transition:0.3s;
+
+}
+
+
+/* HOTEL BUTTON HOVER */
+
+.hotel-btn:hover{
+
+background:linear-gradient(135deg,#ffb74d,#ff9800);
+
+transform:scale(1.04);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.35),
+0 5px 12px rgba(0,0,0,0.25);
+
+}
+
+
+/* ========================= */
+/* TABLET RESPONSIVE */
+/* ========================= */
+
+@media (max-width:1024px){
+
+.hero{
+background-size:75%;
+}
+
+h1{
+font-size:clamp(34px,6vw,55px);
+}
+
+.buttons button{
+padding:18px 55px;
+font-size:22px;
+}
+
+}
+
+
+/* ========================= */
+/* MOBILE RESPONSIVE */
+/* ========================= */
+
+@media (max-width:768px){
+
+.hero{
+background-size:90%;
+padding:40px 15px;
+}
+
+h1{
+margin-bottom:30px;
+}
+
+.buttons{
+flex-direction:column;
+align-items:center;
+}
+
+.buttons button{
+
+width:240px;
+
+padding:16px 20px;
+
+font-size:20px;
+
+}
+
+.accordion-section{
+width:100%;
+}
+
+summary{
+font-size:20px;
+}
+
+.hotel-btn{
+font-size:16px;
+}
+
+}
+
+
+/* ========================= */
+/* SMALL MOBILE */
+/* ========================= */
+
+@media (max-width:480px){
+
+.hero{
+background-size:110%;
+padding:30px 15px;
+}
+
+.buttons button{
+width:240px;
+font-size:18px;
+padding:16px;
+}
+
+summary{
+font-size:18px;
+}
+
+.hotel-btn{
+font-size:16px;
+padding:14px;
+}
+
+}
