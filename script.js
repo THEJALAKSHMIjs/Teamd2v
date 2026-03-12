@@ -3,8 +3,6 @@ const section = document.getElementById("accordionSection")
 const stayBtn = document.getElementById("stayBtn")
 const hotelBtn = document.getElementById("hotelBtn")
 
-/* RESET BUTTON STATE */
-
 function resetButtons(){
 
 stayBtn.classList.remove("active")
@@ -12,9 +10,7 @@ hotelBtn.classList.remove("active")
 
 }
 
-/* ========================= */
-/* STAYCLUB SECTION */
-/* ========================= */
+/* STAYCLUB */
 
 function openStayClub(selectedProperty=null){
 
@@ -41,20 +37,19 @@ section.innerHTML = `
 <summary>Properties in Kochi</summary>
 
 <button class="hotel-btn ${selectedProperty==='river'?'active':''}" onclick="openPropertyPage('river')">
-River Vill'e (Edappally)
+River Vill'e
 </button>
 
 <button class="hotel-btn ${selectedProperty==='luna'?'active':''}" onclick="openPropertyPage('luna')">
-Luna Nest (Edappally)
+Luna Nest
 </button>
 
 <button class="hotel-btn ${selectedProperty==='tranquil'?'active':''}" onclick="openPropertyPage('tranquil')">
-Tranquil (Edakochi)
+Tranquil
 </button>
 
 </details>
 </details>
-
 
 <details ${hillOpen ? "open":""}>
 <summary>Hill Stations</summary>
@@ -63,23 +58,23 @@ Tranquil (Edakochi)
 <summary>Properties in Ooty</summary>
 
 <button class="hotel-btn ${selectedProperty==='woody'?'active':''}" onclick="openPropertyPage('woody')">
-Woody & Co (Coonoor)
+Woody & Co
 </button>
 
 <button class="hotel-btn ${selectedProperty==='container'?'active':''}" onclick="openPropertyPage('container')">
-Container Home (Coonoor)
+The Leafy Nook Container Stay
 </button>
 
 <button class="hotel-btn ${selectedProperty==='yrt'?'active':''}" onclick="openPropertyPage('yrt')">
-YRT Paradise (Coonoor)
+The Nilgiri Paradise
 </button>
 
 <button class="hotel-btn ${selectedProperty==='hillheaven'?'active':''}" onclick="openPropertyPage('hillheaven')">
-Hill Heaven (Kothagiri)
+The Hill Heaven
 </button>
 
 <button class="hotel-btn ${selectedProperty==='littlehome'?'active':''}" onclick="openPropertyPage('littlehome')">
-Little Home (Ooty)
+Little Home
 </button>
 
 </details>
@@ -88,7 +83,7 @@ Little Home (Ooty)
 <summary>Properties in Munnar</summary>
 
 <button class="hotel-btn ${selectedProperty==='mist'?'active':''}" onclick="openPropertyPage('mist')">
-Mist'e Munnar
+The Mist'e Munnar
 </button>
 
 </details>
@@ -101,9 +96,7 @@ section.scrollIntoView({behavior:"smooth"})
 
 }
 
-/* ========================= */
-/* HOTEL SECTION */
-/* ========================= */
+/* HOTEL */
 
 function openHotels(selectedHotel=null){
 
@@ -136,19 +129,19 @@ Hotel Amaravati by D2V
 <summary>Hotels in Kochi</summary>
 
 <button class="hotel-btn ${selectedHotel==='dana'?'active':''}" onclick="openHotelPage('dana')">
-Dana Residency (Thammanam)
+Dana Residency
 </button>
 
 <button class="hotel-btn ${selectedHotel==='palm'?'active':''}" onclick="openHotelPage('palm')">
-Palm Grove by D2V (Edappally)
+Palm Grove by D2V
 </button>
 
 <button class="hotel-btn ${selectedHotel==='zoot'?'active':''}" onclick="openHotelPage('zoot')">
-Zoot by D2V (Kakkanad)
+Zoot by D2V
 </button>
 
 <button class="hotel-btn ${selectedHotel==='saaaj'?'active':''}" onclick="openHotelPage('saaaj')">
-Hotel Saaaj (Kalamassery)
+Hotel Saaaj
 </button>
 
 </details>
@@ -159,9 +152,7 @@ section.scrollIntoView({behavior:"smooth"})
 
 }
 
-/* ========================= */
 /* OPEN HOTEL PAGE */
-/* ========================= */
 
 function openHotelPage(hotel){
 
@@ -169,9 +160,7 @@ window.location.href = "hotel.html?name=" + hotel + "&from=hotel"
 
 }
 
-/* ========================= */
-/* OPEN STAYCLUB PROPERTY */
-/* ========================= */
+/* OPEN PROPERTY PAGE */
 
 function openPropertyPage(property){
 
@@ -179,9 +168,7 @@ window.location.href = "stayclub.html?name=" + property + "&from=stayclub"
 
 }
 
-/* ========================= */
 /* AUTO OPEN AFTER BACK */
-/* ========================= */
 
 const params = new URLSearchParams(window.location.search)
 
@@ -197,9 +184,7 @@ if(open === "hotel"){
 openHotels(hotel)
 }
 
-/* ========================= */
 /* CLICK OUTSIDE RESET */
-/* ========================= */
 
 document.addEventListener("click", function(e){
 

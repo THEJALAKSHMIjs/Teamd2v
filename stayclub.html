@@ -68,47 +68,47 @@ const images = document.getElementById("images")
 const propertyData = {
 
 river:{
-title:"River Vill'e (Edappally)",
+title:"River Vill'e",
 images: Array.from({length:30}, (_,i)=>`images/river/r${i+1}.jpeg`)
 },
 
 luna:{
-title:"Luna Nest (Edappally)",
+title:"Luna Nest",
 images: Array.from({length:17}, (_,i)=>`images/luna/l${i+1}.jpeg`)
 },
 
 tranquil:{
-title:"Tranquil (Edakochi)",
+title:"Tranquil",
 images: Array.from({length:42}, (_,i)=>`images/tranquil/t${i+1}.jpeg`)
 },
 
 woody:{
-title:"Woody & Co (Coonoor)",
+title:"Woody & Co",
 images: Array.from({length:27}, (_,i)=>`images/woody/w${i+1}.jpeg`)
 },
 
 container:{
-title:"Container Home (Coonoor)",
+title:"The Leafy Nook Container Stay",
 images: Array.from({length:39}, (_,i)=>`images/container/c${i+1}.jpeg`)
 },
 
 yrt:{
-title:"YRT Paradise (Coonoor)",
+title:"The Nilgiri Paradise",
 images: Array.from({length:42}, (_,i)=>`images/yrt/y${i+1}.jpeg`)
 },
 
 hillheaven:{
-title:"Hill Heaven (Kothagiri)",
+title:"The Hill Heaven",
 images: Array.from({length:23}, (_,i)=>`images/hill/h${i+1}.jpeg`)
 },
 
 littlehome:{
-title:"Little Home (Ooty)",
+title:"Little Home",
 images: Array.from({length:30}, (_,i)=>`images/little/l${i+1}.jpeg`)
 },
 
 mist:{
-title:"Mist'e Munnar (Munnar)",
+title:"The Mist'e Munnar",
 images: Array.from({length:36}, (_,i)=>`images/mist/m${i+1}.jpeg`)
 }
 
@@ -118,39 +118,29 @@ const selected = propertyData[property]
 
 title.innerText = selected.title
 
-
-/* CREATE IMAGE ELEMENT */
-
 function createImage(src){
 
-const img = document.createElement("img")
-
-img.src = src
-img.loading = "lazy"
-img.decoding = "async"
+const img=document.createElement("img")
+img.src=src
+img.loading="lazy"
+img.decoding="async"
 
 return img
 
 }
 
-
-/* LOAD IMAGES */
-
 selected.images.forEach((img,i)=>{
 
-const image = createImage(img)
+const image=createImage(img)
 
-/* preload first few images for instant display */
-
-if(i < 4){
-const preload = new Image()
-preload.src = img
+if(i<4){
+const preload=new Image()
+preload.src=img
 }
 
 images.appendChild(image)
 
 })
-
 
 function goBack(){
 
