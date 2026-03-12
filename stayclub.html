@@ -27,6 +27,7 @@ width:100%;
 height:220px;
 object-fit:cover;
 box-shadow:0 10px 25px rgba(0,0,0,0.3);
+border-radius:6px;
 }
 
 .sc-btn{
@@ -117,9 +118,39 @@ const selected = propertyData[property]
 
 title.innerText = selected.title
 
-selected.images.forEach(img=>{
-images.innerHTML += `<img src="${img}">`
+
+/* CREATE IMAGE ELEMENT */
+
+function createImage(src){
+
+const img = document.createElement("img")
+
+img.src = src
+img.loading = "lazy"
+img.decoding = "async"
+
+return img
+
+}
+
+
+/* LOAD IMAGES */
+
+selected.images.forEach((img,i)=>{
+
+const image = createImage(img)
+
+/* preload first few images for instant display */
+
+if(i < 4){
+const preload = new Image()
+preload.src = img
+}
+
+images.appendChild(image)
+
 })
+
 
 function goBack(){
 

@@ -21,12 +21,19 @@ margin-top:40px;
 font-size:26px;
 }
 
+.property-images{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
 .property-images img{
 width:300px;
 height:220px;
 object-fit:cover;
 margin:10px;
 box-shadow:0 8px 20px rgba(0,0,0,0.25);
+border-radius:6px;
 }
 
 .back-btn{
@@ -59,11 +66,9 @@ cursor:pointer;
 <script>
 
 const params = new URLSearchParams(window.location.search)
-
 const hotel = params.get("name")
 
 const title = document.getElementById("hotelTitle")
-
 const images = document.getElementById("images")
 
 
@@ -99,10 +104,8 @@ images: Array.from({length:18}, (_,i)=> `images/palm/p${i+1}.jpeg`)
 
 zoot:{
 title:"Zoot by D2V (Kakkanad)",
-images:["images/zoot1.jpg","images/zoot2.jpg"]
+images: Array.from({length:47}, (_,i)=> `images/zoot/z${i+1}.jpeg`)
 },
-
-/* NEW HOTEL */
 
 saaaj:{
 title:"Hotel Saaaj (Kalamassery)",
@@ -121,21 +124,45 @@ bhk2: Array.from({length:10}, (_,i)=> `images/saaaj/2bhk/b${i+1}.jpeg`)
 
 }
 
-
 const selectedHotel = hotelData[hotel]
 
 title.innerText = selectedHotel.title
+
+
+/* IMAGE CREATOR */
+
+function createImage(src){
+
+const img=document.createElement("img")
+img.src=src
+img.loading="lazy"
+img.decoding="async"
+
+return img
+
+}
 
 
 /* NORMAL HOTELS */
 
 if(selectedHotel.images){
 
-const gallery = document.createElement("div")
+const gallery=document.createElement("div")
 gallery.className="property-images"
 
-selectedHotel.images.forEach(img=>{
-gallery.innerHTML += `<img src="${img}">`
+selectedHotel.images.forEach((img,i)=>{
+
+const image=createImage(img)
+
+/* preload first 4 images for fast load */
+
+if(i<4){
+const preload=new Image()
+preload.src=img
+}
+
+gallery.appendChild(image)
+
 })
 
 images.appendChild(gallery)
@@ -147,7 +174,7 @@ images.appendChild(gallery)
 
 if(selectedHotel.categories){
 
-Object.entries(selectedHotel.categories).forEach(([category, imgs])=>{
+Object.entries(selectedHotel.categories).forEach(([category,imgs])=>{
 
 const categoryTitle=document.createElement("h2")
 categoryTitle.className="category-title"
@@ -158,8 +185,17 @@ images.appendChild(categoryTitle)
 const gallery=document.createElement("div")
 gallery.className="property-images"
 
-imgs.forEach(img=>{
-gallery.innerHTML+=`<img src="${img}">`
+imgs.forEach((img,i)=>{
+
+const image=createImage(img)
+
+if(i<3){
+const preload=new Image()
+preload.src=img
+}
+
+gallery.appendChild(image)
+
 })
 
 images.appendChild(gallery)
@@ -172,7 +208,6 @@ images.appendChild(gallery)
 function goBack(){
 
 const params = new URLSearchParams(window.location.search)
-
 const hotel = params.get("name")
 
 window.location.href = "index.html?open=hotel&hotel=" + hotel
