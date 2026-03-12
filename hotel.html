@@ -97,13 +97,21 @@ suite: Array.from({length:15}, (_,i) => `images/dana/suite/s${i+1}.jpeg`)
 }
 },
 
+/* UPDATED PALM GROVE */
+
 palm:{
 title:"Palm Grove by D2V (Edappally)",
-images: Array.from({length:18}, (_,i)=> `images/palm/p${i+1}.jpeg`)
+categories:{
+
+oak: Array.from({length:18}, (_,i)=> `images/palm/p${i+1}.jpeg`),
+
+mahogany: Array.from({length:50}, (_,i)=> `images/palm/mahogany/m${i+1}.jpeg`)
+
+}
 },
 
 zoot:{
-title:"Zoot by D2V (Kakkanad)",
+title:"Zoot Kochi Infopark (Kakkanad)",
 images: Array.from({length:47}, (_,i)=> `images/zoot/z${i+1}.jpeg`)
 },
 
@@ -154,8 +162,6 @@ selectedHotel.images.forEach((img,i)=>{
 
 const image=createImage(img)
 
-/* preload first 4 images for fast load */
-
 if(i<4){
 const preload=new Image()
 preload.src=img
@@ -178,7 +184,15 @@ Object.entries(selectedHotel.categories).forEach(([category,imgs])=>{
 
 const categoryTitle=document.createElement("h2")
 categoryTitle.className="category-title"
-categoryTitle.innerText=category.toUpperCase()
+if(category === "oak"){
+categoryTitle.innerText = "OAK ROOM"
+}
+else if(category === "mahogany"){
+categoryTitle.innerText = "Mahogany (2BHK Appartment)"
+}
+else{
+categoryTitle.innerText = category.toUpperCase()
+}
 
 images.appendChild(categoryTitle)
 

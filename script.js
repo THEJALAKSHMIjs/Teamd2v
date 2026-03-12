@@ -137,7 +137,7 @@ Palm Grove by D2V
 </button>
 
 <button class="hotel-btn ${selectedHotel==='zoot'?'active':''}" onclick="openHotelPage('zoot')">
-Zoot by D2V
+Zoot Kochi Infopark
 </button>
 
 <button class="hotel-btn ${selectedHotel==='saaaj'?'active':''}" onclick="openHotelPage('saaaj')">
