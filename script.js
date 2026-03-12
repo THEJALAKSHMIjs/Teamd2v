@@ -1,3 +1,54 @@
+/* ========================= */
+/* HERO BACKGROUND SLIDER */
+/* ========================= */
+
+const slider = document.querySelector(".hero-slider")
+
+const bgImages = [
+
+"images/container/c1.jpeg",
+"images/hill/h1.jpeg",
+"images/little/l1.jpeg",
+"images/luna/l1.jpeg",
+"images/mist/m1.jpeg",
+"images/river/r1.jpeg",
+"images/tranquil/t1.jpeg",
+"images/woody/w1.jpeg",
+"images/yrt/y1.jpeg",
+"images/zoot/z1.jpeg",
+"images/dana/suite/s1.jpeg",
+"images/cen/c1.jpeg",
+"images/am/am1.jpeg",
+"images/palm/p1.jpeg",
+"images/saaaj/2bhk/b1.jpeg"
+
+]
+
+let bgIndex = 0
+
+function changeHeroBackground(){
+
+if(!slider) return
+
+slider.style.backgroundImage = `url(${bgImages[bgIndex]})`
+
+bgIndex++
+
+if(bgIndex >= bgImages.length){
+bgIndex = 0
+}
+
+}
+
+changeHeroBackground()
+setInterval(changeHeroBackground,4000)
+
+
+
+/* ========================= */
+/* ACCORDION SYSTEM */
+/* ========================= */
+
 const section = document.getElementById("accordionSection")
 
 const stayBtn = document.getElementById("stayBtn")
@@ -10,12 +61,15 @@ hotelBtn.classList.remove("active")
 
 }
 
+
+
+/* ========================= */
 /* STAYCLUB */
+/* ========================= */
 
 function openStayClub(selectedProperty=null){
 
 resetButtons()
-
 stayBtn.classList.add("active")
 
 const kochiProps = ["river","luna","tranquil"]
@@ -96,12 +150,15 @@ section.scrollIntoView({behavior:"smooth"})
 
 }
 
-/* HOTEL */
+
+
+/* ========================= */
+/* HOTELS */
+/* ========================= */
 
 function openHotels(selectedHotel=null){
 
 resetButtons()
-
 hotelBtn.classList.add("active")
 
 const thrissurHotels = ["central","amaravati"]
@@ -152,23 +209,37 @@ section.scrollIntoView({behavior:"smooth"})
 
 }
 
+
+
+/* ========================= */
 /* OPEN HOTEL PAGE */
+/* ========================= */
 
 function openHotelPage(hotel){
 
-window.location.href = "hotel.html?name=" + hotel + "&from=hotel"
+window.location.href =
+"hotel.html?name=" + hotel + "&open=hotel&hotel=" + hotel
 
 }
 
+
+
+/* ========================= */
 /* OPEN PROPERTY PAGE */
+/* ========================= */
 
 function openPropertyPage(property){
 
-window.location.href = "stayclub.html?name=" + property + "&from=stayclub"
+window.location.href =
+"stayclub.html?name=" + property + "&open=stayclub&property=" + property
 
 }
 
+
+
+/* ========================= */
 /* AUTO OPEN AFTER BACK */
+/* ========================= */
 
 const params = new URLSearchParams(window.location.search)
 
@@ -184,7 +255,11 @@ if(open === "hotel"){
 openHotels(hotel)
 }
 
+
+
+/* ========================= */
 /* CLICK OUTSIDE RESET */
+/* ========================= */
 
 document.addEventListener("click", function(e){
 

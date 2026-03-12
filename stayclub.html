@@ -28,6 +28,12 @@ height:220px;
 object-fit:cover;
 box-shadow:0 10px 25px rgba(0,0,0,0.3);
 border-radius:6px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.property-images img:hover{
+transform:scale(1.05);
 }
 
 .sc-btn{
@@ -37,6 +43,69 @@ font-size:18px;
 background:#e4be25;
 border:none;
 cursor:pointer;
+}
+
+/* FULLSCREEN VIEWER */
+
+#fullscreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.92);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+flex-direction:column;
+}
+
+#fullscreen img{
+max-width:90%;
+max-height:85%;
+border-radius:6px;
+}
+
+/* CLOSE BUTTON */
+
+.close-btn{
+position:absolute;
+top:25px;
+right:35px;
+font-size:35px;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* NAVIGATION */
+
+.nav-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:60px;
+color:white;
+cursor:pointer;
+padding:10px 20px;
+user-select:none;
+}
+
+.prev{
+left:20px;
+}
+
+.next{
+right:20px;
+}
+
+/* IMAGE COUNTER */
+
+.counter{
+color:white;
+margin-top:15px;
+font-size:18px;
 }
 
 </style>
@@ -57,6 +126,23 @@ cursor:pointer;
 </div>
 
 
+<!-- FULLSCREEN VIEWER -->
+
+<div id="fullscreen">
+
+<span class="close-btn" onclick="closeFullscreen()">✕</span>
+
+<div class="nav-btn prev" onclick="prevImage()">❮</div>
+
+<img id="fullImg">
+
+<div class="nav-btn next" onclick="nextImage()">❯</div>
+
+<div class="counter" id="counter"></div>
+
+</div>
+
+
 <script>
 
 const params = new URLSearchParams(window.location.search)
@@ -65,51 +151,59 @@ const property = params.get("name")
 const title = document.getElementById("propertyTitle")
 const images = document.getElementById("images")
 
+const fullscreen = document.getElementById("fullscreen")
+const fullImg = document.getElementById("fullImg")
+const counter = document.getElementById("counter")
+
+let currentImages=[]
+let currentIndex=0
+
+
 const propertyData = {
 
 river:{
 title:"River Vill'e",
-images: Array.from({length:52}, (_,i)=>`images/river/r${i+1}.jpeg`)
+images:Array.from({length:52},(_,i)=>`images/river/r${i+1}.jpeg`)
 },
 
 luna:{
 title:"Luna Nest",
-images: Array.from({length:25}, (_,i)=>`images/luna/l${i+1}.jpeg`)
+images:Array.from({length:25},(_,i)=>`images/luna/l${i+1}.jpeg`)
 },
 
 tranquil:{
 title:"Tranquil",
-images: Array.from({length:42}, (_,i)=>`images/tranquil/t${i+1}.jpeg`)
+images:Array.from({length:42},(_,i)=>`images/tranquil/t${i+1}.jpeg`)
 },
 
 woody:{
 title:"Woody & Co",
-images: Array.from({length:27}, (_,i)=>`images/woody/w${i+1}.jpeg`)
+images:Array.from({length:27},(_,i)=>`images/woody/w${i+1}.jpeg`)
 },
 
 container:{
 title:"The Leafy Nook Container Stay",
-images: Array.from({length:39}, (_,i)=>`images/container/c${i+1}.jpeg`)
+images:Array.from({length:39},(_,i)=>`images/container/c${i+1}.jpeg`)
 },
 
 yrt:{
 title:"The Nilgiri Paradise",
-images: Array.from({length:42}, (_,i)=>`images/yrt/y${i+1}.jpeg`)
+images:Array.from({length:42},(_,i)=>`images/yrt/y${i+1}.jpeg`)
 },
 
 hillheaven:{
 title:"The Hill Heaven",
-images: Array.from({length:23}, (_,i)=>`images/hill/h${i+1}.jpeg`)
+images:Array.from({length:23},(_,i)=>`images/hill/h${i+1}.jpeg`)
 },
 
 littlehome:{
 title:"Little Home",
-images: Array.from({length:30}, (_,i)=>`images/little/l${i+1}.jpeg`)
+images:Array.from({length:30},(_,i)=>`images/little/l${i+1}.jpeg`)
 },
 
 mist:{
 title:"The Mist'e Munnar",
-images: Array.from({length:36}, (_,i)=>`images/mist/m${i+1}.jpeg`)
+images:Array.from({length:36},(_,i)=>`images/mist/m${i+1}.jpeg`)
 }
 
 }
@@ -118,20 +212,74 @@ const selected = propertyData[property]
 
 title.innerText = selected.title
 
-function createImage(src){
+
+function createImage(src,index,list){
 
 const img=document.createElement("img")
+
 img.src=src
 img.loading="lazy"
 img.decoding="async"
+
+img.onclick=()=>{
+currentImages=list
+currentIndex=index
+openFullscreen()
+}
 
 return img
 
 }
 
+
+function openFullscreen(){
+
+fullImg.src=currentImages[currentIndex]
+
+counter.innerText=(currentIndex+1)+" / "+currentImages.length
+
+fullscreen.style.display="flex"
+
+}
+
+
+function closeFullscreen(){
+fullscreen.style.display="none"
+}
+
+
+function nextImage(){
+currentIndex=(currentIndex+1)%currentImages.length
+openFullscreen()
+}
+
+
+function prevImage(){
+currentIndex=(currentIndex-1+currentImages.length)%currentImages.length
+openFullscreen()
+}
+
+
+/* KEYBOARD NAVIGATION */
+
+document.addEventListener("keydown",function(e){
+
+if(fullscreen.style.display==="flex"){
+
+if(e.key==="ArrowRight") nextImage()
+
+if(e.key==="ArrowLeft") prevImage()
+
+if(e.key==="Escape") closeFullscreen()
+
+}
+
+})
+
+
 selected.images.forEach((img,i)=>{
 
-const image=createImage(img)
+const image=createImage(img,i,selected.images)
 
 if(i<4){
 const preload=new Image()
@@ -142,12 +290,13 @@ images.appendChild(image)
 
 })
 
+
 function goBack(){
 
 const params = new URLSearchParams(window.location.search)
 const property = params.get("name")
 
-window.location.href = "index.html?open=stayclub&property=" + property
+window.location.href="index.html?open=stayclub&property="+property
 
 }
 
