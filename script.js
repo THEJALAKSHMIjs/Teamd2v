@@ -26,6 +26,29 @@ const bgImages = [
 
 let bgIndex = 0
 
+
+/* ===== PRELOAD ALL IMAGES ===== */
+
+const preloadedImages = []
+
+function preloadImages(){
+
+for(let i=0;i<bgImages.length;i++){
+
+const img = new Image()
+img.src = bgImages[i]
+
+preloadedImages.push(img)
+
+}
+
+}
+
+preloadImages()
+
+
+/* ===== CHANGE BACKGROUND ===== */
+
 function changeHeroBackground(){
 
 if(!slider) return
@@ -41,6 +64,7 @@ bgIndex = 0
 }
 
 changeHeroBackground()
+
 setInterval(changeHeroBackground,4000)
 
 
@@ -90,17 +114,11 @@ section.innerHTML = `
 <details class="nested" ${cityOpen ? "open":""}>
 <summary>Properties in Kochi</summary>
 
-<button class="hotel-btn ${selectedProperty==='river'?'active':''}" onclick="openPropertyPage('river')">
-River Vill'e
-</button>
+<button class="hotel-btn ${selectedProperty==='river'?'active':''}" onclick="openPropertyPage('river')">River Vill'e</button>
 
-<button class="hotel-btn ${selectedProperty==='luna'?'active':''}" onclick="openPropertyPage('luna')">
-Luna Nest
-</button>
+<button class="hotel-btn ${selectedProperty==='luna'?'active':''}" onclick="openPropertyPage('luna')">Luna Nest</button>
 
-<button class="hotel-btn ${selectedProperty==='tranquil'?'active':''}" onclick="openPropertyPage('tranquil')">
-Tranquil
-</button>
+<button class="hotel-btn ${selectedProperty==='tranquil'?'active':''}" onclick="openPropertyPage('tranquil')">Tranquil</button>
 
 </details>
 </details>
@@ -111,34 +129,22 @@ Tranquil
 <details class="nested" ${ootyOpen ? "open":""}>
 <summary>Properties in Ooty</summary>
 
-<button class="hotel-btn ${selectedProperty==='woody'?'active':''}" onclick="openPropertyPage('woody')">
-Woody & Co
-</button>
+<button class="hotel-btn ${selectedProperty==='woody'?'active':''}" onclick="openPropertyPage('woody')">Woody & Co</button>
 
-<button class="hotel-btn ${selectedProperty==='container'?'active':''}" onclick="openPropertyPage('container')">
-The Leafy Nook Container Stay
-</button>
+<button class="hotel-btn ${selectedProperty==='container'?'active':''}" onclick="openPropertyPage('container')">The Leafy Nook Container Stay</button>
 
-<button class="hotel-btn ${selectedProperty==='yrt'?'active':''}" onclick="openPropertyPage('yrt')">
-The Nilgiri Paradise
-</button>
+<button class="hotel-btn ${selectedProperty==='yrt'?'active':''}" onclick="openPropertyPage('yrt')">The Nilgiri Paradise</button>
 
-<button class="hotel-btn ${selectedProperty==='hillheaven'?'active':''}" onclick="openPropertyPage('hillheaven')">
-The Hill Heaven
-</button>
+<button class="hotel-btn ${selectedProperty==='hillheaven'?'active':''}" onclick="openPropertyPage('hillheaven')">The Hill Heaven</button>
 
-<button class="hotel-btn ${selectedProperty==='littlehome'?'active':''}" onclick="openPropertyPage('littlehome')">
-Little Home
-</button>
+<button class="hotel-btn ${selectedProperty==='littlehome'?'active':''}" onclick="openPropertyPage('littlehome')">Little Home</button>
 
 </details>
 
 <details class="nested" ${munnarOpen ? "open":""}>
 <summary>Properties in Munnar</summary>
 
-<button class="hotel-btn ${selectedProperty==='mist'?'active':''}" onclick="openPropertyPage('mist')">
-The Mist'e Munnar
-</button>
+<button class="hotel-btn ${selectedProperty==='mist'?'active':''}" onclick="openPropertyPage('mist')">The Mist'e Munnar</button>
 
 </details>
 
